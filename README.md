@@ -6,7 +6,7 @@ You are also only allowed 500 calls per day per key.
 ## How to use this program
 To run: don't forget that it has one command line argument: VERSION
 
-*ex: python stock_data.py 1*
+*ex: python stock_data.py [VERSION]*
 
 If you input 1, then it will not limit the program to 500 calls total, which may or may not cause errors, depending on whether Alpha Vantage is feeling nice or not.
 Any other input will limit it to 500 calls, and there is an option to continue from where you left off.
