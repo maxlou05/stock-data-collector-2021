@@ -8,12 +8,10 @@ To run: don't forget that it has one command line argument: VERSION
 
 *ex: python stock_data.py 1*
 
-If you input 1, then it will not limit the program to 500 calls total, which may cause errors.
+If you input 1, then it will not limit the program to 500 calls total, which may or may not cause errors, depending on whether Alphavantage is feeling nice or not.
 Any other input will limit it to 500 calls, and there is an option to continue from where you left off.
 
 It will ask for an input file path. Just input where your input file is.
-It is going to output the number that you inputted into "How many quarters to check" amount of csv files with data.
-It will also print out the progress in the terminal in case you are curious.
 
 *ex: c:/users/you/Downloads/input.csv*
 
@@ -21,3 +19,11 @@ It will also print out the progress in the terminal in case you are curious.
 - a csv file
 - format: *ticker,company_name,industry/sector*
 - no header lines
+
+# Output
+It is going to output the number that you inputted into "How many quarters to check" amount of csv files with data.
+It will also print out the progress in the terminal in case you are curious.
+
+In the output files, you may see these exceptions:
+- ERROR: An unknown error has occured
+- N/A: The stock didn't exist at the time
