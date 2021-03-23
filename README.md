@@ -17,7 +17,7 @@ It will ask for an input file path. Just input where your input file is.
 
 *FILE REQUIREMENTS:*
 - a csv file
-- format: *ticker,company_name,industry/sector*
+  - format: *ticker,company_name,industry/sector*
 - no header lines
 
 It will also ask for your key. You can get your free key [here](https://www.alphavantage.co/support/#api-key).
