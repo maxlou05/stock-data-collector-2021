@@ -18,3 +18,4 @@ It will ask for an input file path. Just input where your input file is.
 *FILE REQUIREMENTS:*
 - a csv file
 - format: *ticker,company_name,industry/sector*
+- no header lines
