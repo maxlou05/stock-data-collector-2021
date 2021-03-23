@@ -12,6 +12,8 @@ If you input 1, then it will not limit the program to 500 calls total, which may
 Any other input will limit it to 500 calls, and there is an option to continue from where you left off.
 
 It will ask for an input file path. Just input where your input file is.
+It is going to output the number that you inputted into "How many quarters to check" amount of csv files with data.
+It will also print out the progress in the terminal in case you are curious.
 
 *ex: c:/users/you/Downloads/input.csv*
 
