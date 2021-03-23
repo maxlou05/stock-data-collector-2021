@@ -13,9 +13,8 @@ class stock:
         self.COMPANY_NAME = n
         self.INDUSTRY = i
 
-INPUT_FILE_PATH = ""
-
 VERSION = int(sys.argv[1])
+INPUT_FILE_PATH = input("Input file path:\n")
 KEY = input("Key: \n")
 NUM_OF_URLS = 3
 NUM_OF_STOCKS = int(input("How many stocks?\n"))
@@ -42,7 +41,7 @@ if LIMIT > NUM_OF_STOCKS:
 
 # Read in the stock info
 stocks = []
-f = open("d:/Programs/Python programs/Stock_Tools/stock_list_2021.csv", "r")
+f = open(INPUT_FILE_PATH, "r")
 for i in range(NUM_OF_STOCKS):
     temp = f.readline().split(",")
     stocks.append(stock(temp[0], temp[1], temp[2]))
@@ -51,7 +50,7 @@ f.close()
 # Resets and writes the heading
 if PORTION == 1:
     for q in range(QUARTERS_TO_CHECK):
-        r = open("d:/Programs/Python programs/Stock_Tools/2021_test_data_Q{}.csv".format(q+1), "w")
+        r = open("2021_test_data_Q{}.csv".format(q+1), "w")
         r.write("Ticker,Company Name,Sector,Price,Gross Profit,Net Income,Shareholder Equity,Liabilities,Shares Outstanding,Total Assests\n")
         r.close()
 
