@@ -80,7 +80,26 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
     # # time.sleep(13)
 
     for q in range(QUARTERS_TO_CHECK):
-        m = balanceData["quarterlyReports"][q]["fiscalDateEnding"]
+        # Make sure the stock existed back then
+        try:
+            m = balanceData["quarterlyReports"][q]["fiscalDateEnding"]
+        except IndexError:
+            out = open("2021_test_data_Q{}.csv".format(q+1), "a")
+            out.write("{},{},{},{},{},{},{},{},{},{}\n".format(
+                s.TICKER,
+                s.COMPANY_NAME,
+                s.INDUSTRY,
+                price,
+                incomeData["quarterlyReports"][q]["grossProfit"],
+                incomeData["quarterlyReports"][q]["netIncome"],
+                balanceData["quarterlyReports"][q]["totalShareholderEquity"],
+                balanceData["quarterlyReports"][q]["totalLiabilities"],
+                balanceData["quarterlyReports"][q]["commonStockSharesOutstanding"],
+                balanceData["quarterlyReports"][q]["totalAssets"]
+            ))
+            out.close()
+            continue
+        
         completed = False
         d = 31
         price = 0
@@ -101,7 +120,7 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
         if not completed:  # So now I do this just in case something bad like that happens
             price = "ERROR"
         
-        out = open("d:/Programs/Python programs/Stock_Tools/2021_test_data_Q{}.csv".format(q+1), "a")
+        out = open("2021_test_data_Q{}.csv".format(q+1), "a")
         out.write("{},{},{},{},{},{},{},{},{},{}\n".format(
             s.TICKER,
             s.COMPANY_NAME,
