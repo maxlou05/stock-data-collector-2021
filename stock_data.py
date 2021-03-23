@@ -74,10 +74,10 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
 
     # response = requests.get(cashURL)
     # cashData = response.json()
-    # # time.sleep(13)
+    # time.sleep(13)
     # response = requests.get(overviewURL)
     # overviewData = response.json()
-    # # time.sleep(13)
+    # time.sleep(13)
 
     for q in range(QUARTERS_TO_CHECK):
         # Make sure the stock existed back then
@@ -85,17 +85,10 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
             m = balanceData["quarterlyReports"][q]["fiscalDateEnding"]
         except IndexError:
             out = open("2021_test_data_Q{}.csv".format(q+1), "a")
-            out.write("{},{},{},{},{},{},{},{},{},{}\n".format(
+            out.write("{},{},{},N/A,N/A,N/A,N/A,N/A,N/A,N/A\n".format(
                 s.TICKER,
                 s.COMPANY_NAME,
-                s.INDUSTRY,
-                price,
-                incomeData["quarterlyReports"][q]["grossProfit"],
-                incomeData["quarterlyReports"][q]["netIncome"],
-                balanceData["quarterlyReports"][q]["totalShareholderEquity"],
-                balanceData["quarterlyReports"][q]["totalLiabilities"],
-                balanceData["quarterlyReports"][q]["commonStockSharesOutstanding"],
-                balanceData["quarterlyReports"][q]["totalAssets"]
+                s.INDUSTRY
             ))
             out.close()
             continue
