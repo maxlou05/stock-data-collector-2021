@@ -16,7 +16,7 @@ class stock:
 INPUT_FILE_PATH = ""
 
 VERSION = int(sys.argv[1])
-KEY = "D5ZVTJI7WF4FD5JD"
+KEY = input("Key: \n")
 NUM_OF_URLS = 3
 NUM_OF_STOCKS = int(input("How many stocks?\n"))
 QUARTERS_TO_CHECK = int(input("How many quarters to check?\n"))
@@ -65,7 +65,7 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
 
     response = requests.get(balanceURL)
     balanceData = response.json()
-    time.sleep(13)
+    time.sleep(13)  # I use 13 seconds just to be safe
     response = requests.get(incomeURL)
     incomeData = response.json()
     time.sleep(13)
