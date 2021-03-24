@@ -84,14 +84,17 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
         try:
             m = balanceData["quarterlyReports"][q]["fiscalDateEnding"]
         except IndexError:
-            out = open("2021_test_data_Q{}.csv".format(q+1), "a")
-            out.write("{},{},{},N/A,N/A,N/A,N/A,N/A,N/A,N/A\n".format(
-                s.TICKER,
-                s.COMPANY_NAME,
-                s.INDUSTRY
-            ))
-            out.close()
-            continue
+            try:
+                m = incomeData["quarterlyReports"][q]["fiscalDateEnding"]
+            except IndexError:
+                out = open("d:/Programs/Python programs/Stock_Tools/2021_test_data_Q{}.csv".format(q+1), "a")
+                out.write("{},{},{},N/A,N/A,N/A,N/A,N/A,N/A,N/A\n".format(
+                    s.TICKER,
+                    s.COMPANY_NAME,
+                    s.INDUSTRY
+                ))
+                out.close()
+                continue
         
         completed = False
         d = 31
@@ -113,20 +116,47 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
         if not completed:  # So now I do this just in case something bad like that happens
             price = "ERROR"
         
-        out = open("2021_test_data_Q{}.csv".format(q+1), "a")
+        # For some reason, some quarters have an income statement but not a balance sheet
+        try:
+            profit = incomeData["quarterlyReports"][q]["grossProfit"]
+        except:
+            profit = "N/A"
+        try:
+            income = incomeData["quarterlyReports"][q]["netIncome"]
+        except:
+            income = "N/A"
+        try:
+            equity = balanceData["quarterlyReports"][q]["totalShareholderEquity"]
+        except:
+            equity = "N/A"
+        try:
+            liabilities = balanceData["quarterlyReports"][q]["totalLiabilities"]
+        except:
+            liabilities = "N/A"
+        try:
+            shares = balanceData["quarterlyReports"][q]["commonStockSharesOutstanding"]
+        except:
+            shares = "N/A"
+        try:
+            assets = balanceData["quarterlyReports"][q]["totalAssets"]
+        except:
+            assets = "N/A"
+
+        out = open("d:/Programs/Python programs/Stock_Tools/2021_test_data_Q{}.csv".format(q+1), "a")
         out.write("{},{},{},{},{},{},{},{},{},{}\n".format(
             s.TICKER,
             s.COMPANY_NAME,
             s.INDUSTRY,
             price,
-            incomeData["quarterlyReports"][q]["grossProfit"],
-            incomeData["quarterlyReports"][q]["netIncome"],
-            balanceData["quarterlyReports"][q]["totalShareholderEquity"],
-            balanceData["quarterlyReports"][q]["totalLiabilities"],
-            balanceData["quarterlyReports"][q]["commonStockSharesOutstanding"],
-            balanceData["quarterlyReports"][q]["totalAssets"]
+            profit,
+            income,
+            equity,
+            liabilities,
+            shares,
+            assets
         ))
         out.close()
+        
     spaces = " "*(8-len(s.TICKER))
     percent = round((i+1)/LIMIT, 4)*100
     print("data retrival complete for: {}{}{}%    ({}/{})".format(s.TICKER, spaces, percent, i+1, LIMIT))
