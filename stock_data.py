@@ -128,5 +128,5 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
         ))
         out.close()
     spaces = " "*(8-len(s.TICKER))
-    percent = round((i+1)/LIMIT, 2)
+    percent = round((i+1)/LIMIT, 4)*100
     print("data retrival complete for: {}{}{}%    ({}/{})".format(s.TICKER, spaces, percent, i+1, LIMIT))
