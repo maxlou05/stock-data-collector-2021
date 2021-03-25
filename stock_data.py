@@ -22,6 +22,8 @@ QUARTERS_TO_CHECK = int(input("How many quarters to check?\n"))
 PORTION_SIZE = int(500/NUM_OF_URLS)
 PORTION = 0
 
+OUT_OF_CALLS = False
+
 if VERSION == 1:
     PORTION_SIZE = NUM_OF_STOCKS
 
@@ -95,6 +97,12 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
                 ))
                 out.close()
                 continue
+        except KeyError:
+            OUT_OF_CALLS = True
+            break
+        
+        if OUT_OF_CALLS:
+            break
         
         completed = False
         d = 31
@@ -160,3 +168,8 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
     spaces = " "*(8-len(s.TICKER))
     percent = round((i+1)/LIMIT, 4)*100
     print("data retrival complete for: {}{}{}%    ({}/{})".format(s.TICKER, spaces, percent, i+1, LIMIT))
+
+if OUT_OF_CALLS:
+    print("--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---")
+    print("You have run out of calls...")
+    print("Please try again tomorrow without using any calls ahead of time.")
