@@ -101,9 +101,6 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
             OUT_OF_CALLS = True
             break
         
-        if OUT_OF_CALLS:
-            break
-        
         completed = False
         d = 31
         price = 0
@@ -164,7 +161,10 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
             assets
         ))
         out.close()
-        
+    
+    if OUT_OF_CALLS:
+        break
+    
     spaces = " "*(8-len(s.TICKER))
     percent = round((i+1)/LIMIT, 4)*100
     print("data retrival complete for: {}{}{}%    ({}/{})".format(s.TICKER, spaces, percent, i+1, LIMIT))
