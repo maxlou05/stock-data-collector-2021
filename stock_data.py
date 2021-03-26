@@ -15,10 +15,11 @@ class stock:
 
 INPUT_FILE_PATH = input("Input file path:\n")
 KEY = input("Key: \n")
+MAX_CALLS = 500
 NUM_OF_URLS = 3
 NUM_OF_STOCKS = int(input("How many stocks?\n"))
 QUARTERS_TO_CHECK = int(input("How many quarters to check?\n"))
-PORTION_SIZE = int(500/NUM_OF_URLS)
+PORTION_SIZE = int(MAX_CALLS/NUM_OF_URLS)
 PORTION = 0
 
 OUT_OF_CALLS = False
