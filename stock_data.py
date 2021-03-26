@@ -54,11 +54,11 @@ if PORTION == 1:
 
 for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
     s = stocks[i]
+    monthlyURL = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol={}&apikey={}".format(s.TICKER, KEY)
     balanceURL = "https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={}&apikey={}".format(s.TICKER, KEY)
     incomeURL = "https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={}&apikey={}".format(s.TICKER, KEY)
     # overviewURL = "https://www.alphavantage.co/query?function=OVERVIEW&symbol={}&apikey={}".format(s.TICKER, KEY)
     # cashURL = "https://www.alphavantage.co/query?function=CASH_FLOW&symbol={}&apikey={}".format(s.TICKER, KEY)
-    monthlyURL = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol={}&apikey={}".format(s.TICKER, KEY)
 
     response = requests.get(balanceURL)
     balanceData = response.json()
@@ -85,7 +85,7 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
             try:
                 m = incomeData["quarterlyReports"][q]["fiscalDateEnding"]
             except IndexError:
-                out = open("d:/Programs/Python programs/Stock_Tools/2021_test_data_Q{}.csv".format(q+1), "a")
+                out = open("2021_test_data_Q{}.csv".format(q+1), "a")
                 out.write("{},{},{},N/A,N/A,N/A,N/A,N/A,N/A,N/A\n".format(
                     s.TICKER,
                     s.COMPANY_NAME,
