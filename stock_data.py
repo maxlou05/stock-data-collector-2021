@@ -13,7 +13,6 @@ class stock:
         self.COMPANY_NAME = n
         self.INDUSTRY = i
 
-VERSION = int(sys.argv[1])
 INPUT_FILE_PATH = input("Input file path:\n")
 KEY = input("Key: \n")
 NUM_OF_URLS = 3
@@ -23,9 +22,6 @@ PORTION_SIZE = int(500/NUM_OF_URLS)
 PORTION = 0
 
 OUT_OF_CALLS = False
-
-if VERSION == 1:
-    PORTION_SIZE = NUM_OF_STOCKS
 
 if NUM_OF_STOCKS > PORTION_SIZE:
     if PORTION_SIZE*2 >= NUM_OF_STOCKS:
@@ -147,7 +143,7 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
         except:
             assets = "N/A"
 
-        out = open("d:/Programs/Python programs/Stock_Tools/2021_test_data_Q{}.csv".format(q+1), "a")
+        out = open("2021_test_data_Q{}.csv".format(q+1), "a")
         out.write("{},{},{},{},{},{},{},{},{},{}\n".format(
             s.TICKER,
             s.COMPANY_NAME,
