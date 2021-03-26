@@ -164,7 +164,7 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
     
     spaces = " "*(8-len(s.TICKER))
     percent = round((i+1)/LIMIT, 4)*100
-    print("data retrival complete for: {}{}{}%    ({}/{})".format(s.TICKER, spaces, percent, i+1, LIMIT))
+    print("data retrival complete for: {}{}{}%    ({}/{})".format(s.TICKER, spaces, percent, i+1, LIMIT), end='\n', flush=True)
 
 if OUT_OF_CALLS:
     print("--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---")
