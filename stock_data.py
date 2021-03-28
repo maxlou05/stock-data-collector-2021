@@ -164,7 +164,7 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
     
     spaces = " "*(8-len(s.TICKER))
     num = i+1-(PORTION-1)*PORTION_SIZE
-    den = LIMIT-(PORTION-1)*PORTION_SIZE)
+    den = LIMIT-(PORTION-1)*PORTION_SIZE
     percent = round(num/den*100, 2)
     print("data retrival complete for: {}{}{}%    ({}/{})".format(s.TICKER, spaces, percent, num, den), end='\n', flush=True)  # Adding flush ensures it doesn't get stuck buffering sometimes.
 
