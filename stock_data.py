@@ -106,7 +106,7 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
         # This makes sure that we just get the day closest to the month end and not an error
         while (not completed) and (d > 0):
             try:
-                price = monthlyData["Monthly Adjusted Time Series"][m]["4. close"]
+                price = monthlyData["Monthly Adjusted Time Series"][m]["5. adjusted close"]
                 completed = True
             except KeyError:
                 t = m.split("-")
