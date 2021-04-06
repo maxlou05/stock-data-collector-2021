@@ -3,16 +3,6 @@ import statistics
 import time
 import sys
 
-class stock:
-    TICKER = ""
-    COMPANY_NAME = ""
-    INDUSTRY = ""
-
-    def __init__(self, t, n, i):
-        self.TICKER = t
-        self.COMPANY_NAME = n
-        self.INDUSTRY = i
-
 INPUT_FILE_PATH = input("Input file path:\n")
 KEY = input("Key: \n")
 MAX_CALLS = 500
@@ -42,24 +32,24 @@ if LIMIT > NUM_OF_STOCKS:
 stocks = []
 f = open(INPUT_FILE_PATH, "r")
 for i in range(NUM_OF_STOCKS):
-    temp = f.readline().split(",")
-    stocks.append(stock(temp[0], temp[1], temp[2]))
+    temp = f.readline()
+    stocks.append(temp)
 f.close()
 
 # Resets and writes the heading
 if PORTION == 1:
     for q in range(QUARTERS_TO_CHECK):
-        r = open("2021_test_data_Q{}.csv".format(q+1), "w")
-        r.write("Ticker,Company Name,Sector,Price,Gross Profit,Net Income,Shareholder Equity,Liabilities,Shares Outstanding,Total Assests\n")
+        r = open("Q{}.csv".format(q+1), "w")
+        r.write("Ticker,Price,Gross Profit,Net Income,Shareholder Equity,Liabilities,Shares Outstanding,Total Assests\n")
         r.close()
 
 for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
     s = stocks[i]
-    monthlyURL = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol={}&apikey={}".format(s.TICKER, KEY)
-    balanceURL = "https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={}&apikey={}".format(s.TICKER, KEY)
-    incomeURL = "https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={}&apikey={}".format(s.TICKER, KEY)
-    # overviewURL = "https://www.alphavantage.co/query?function=OVERVIEW&symbol={}&apikey={}".format(s.TICKER, KEY)
-    # cashURL = "https://www.alphavantage.co/query?function=CASH_FLOW&symbol={}&apikey={}".format(s.TICKER, KEY)
+    monthlyURL = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol={}&apikey={}".format(s, KEY)
+    balanceURL = "https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={}&apikey={}".format(s, KEY)
+    incomeURL = "https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={}&apikey={}".format(s, KEY)
+    # overviewURL = "https://www.alphavantage.co/query?function=OVERVIEW&symbol={}&apikey={}".format(s, KEY)
+    # cashURL = "https://www.alphavantage.co/query?function=CASH_FLOW&symbol={}&apikey={}".format(s, KEY)
 
     response = requests.get(balanceURL)
     balanceData = response.json()
@@ -86,12 +76,8 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
             try:
                 m = incomeData["quarterlyReports"][q]["fiscalDateEnding"]
             except IndexError:
-                out = open("2021_test_data_Q{}.csv".format(q+1), "a")
-                out.write("{},{},{},N/A,N/A,N/A,N/A,N/A,N/A,N/A\n".format(
-                    s.TICKER,
-                    s.COMPANY_NAME,
-                    s.INDUSTRY
-                ))
+                out = open("Q{}.csv".format(q+1), "a")
+                out.write("{},N/A,N/A,N/A,N/A,N/A,N/A,N/A\n".format(s))
                 out.close()
                 continue
         except KeyError:
@@ -115,8 +101,8 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
                 m = "{}-{}-{}".format(t[0], t[1], d)
                 d -= 1
                 completed = False
-        if not completed:  # So now I do this just in case something bad like that happens
-            price = "ERROR"
+        if not completed:    # So now I do this just in case something bad like that happens
+            price = "ERROR"  # It's usually when a stock ticker is inputted as "BRKA" instead of "BRK.A"
         
         # For some reason, some quarters have an income statement but not a balance sheet
         try:
@@ -144,11 +130,9 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
         except:
             assets = "N/A"
 
-        out = open("2021_test_data_Q{}.csv".format(q+1), "a")
-        out.write("{},{},{},{},{},{},{},{},{},{}\n".format(
-            s.TICKER,
-            s.COMPANY_NAME,
-            s.INDUSTRY,
+        out = open("Q{}.csv".format(q+1), "a")
+        out.write("{},{},{},{},{},{},{},{}\n".format(
+            s,
             price,
             profit,
             income,
