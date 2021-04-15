@@ -102,7 +102,7 @@ for i in range((PORTION-1)*PORTION_SIZE, LIMIT):
                 d -= 1
                 completed = False
         if not completed:    # So now I do this just in case something bad like that happens
-            price = "ERROR"  # It's usually when a stock ticker is inputted as "BRKA" instead of "BRK.A"
+            price = "ERROR"
         
         # For some reason, some quarters have an income statement but not a balance sheet
         try:
