@@ -32,7 +32,7 @@ It will ask for an input file path. Just input where your input file is.
 It will also ask for your key. You can get your free key [here](https://www.alphavantage.co/support/#api-key).
 
 ## Output
-It is going to output the number that you inputted into "How many quarters to check" amount of csv files with data.
+For each quarter you check, it will output one csv file with data from that quarter.
 It will also print out the progress in the terminal in case you are curious.
 
 In the output files, you may see these exceptions:
